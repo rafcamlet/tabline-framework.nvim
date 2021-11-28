@@ -32,10 +32,10 @@ end
 
 ## Installation
 
-With vim-plug:
+With packer.nvim:
 
 ```lua
-Plug { "rafcamlet/tabline-framework.nvim",  requires = "kyazdani42/nvim-web-devicons" }
+use { "rafcamlet/tabline-framework.nvim",  requires = "kyazdani42/nvim-web-devicons" }
 ```
 
 ## Configuration
@@ -134,7 +134,7 @@ local render = function(f)
     -- associated with the filetype
     local icon_color = f.icon_color(info.filename)
 
-    -- If this is the current tab then hilight it
+    -- If this is the current tab then highlight it
     if info.current then
       -- We can use set_fg to change default fg color
       -- so you won't need to specify it every time
