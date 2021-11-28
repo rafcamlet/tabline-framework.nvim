@@ -3,7 +3,7 @@ local get_tab_var = require("tabline_framework.helpers").get_tab_var
 local function setup_tab_buffers()
   vim.cmd [[augroup TablineBuffers]]
   vim.cmd [[autocmd!]]
-  vim.cmd [[autocmd BufEnter * lua require'tabline_framework.helpers'.add_buf_to_tab()]]
+  vim.cmd [[autocmd BufEnter * lua require'tabline_framework.toys'.add_buf_to_tab()]]
   -- vim.cmd [[autocmd BufUnload * let g:tabline_buffers_bufnr_last = g:tabline_buffers_bufnr]]
   vim.cmd [[augroup END]]
 end
@@ -13,7 +13,6 @@ local function get_tab_buffers(tab)
   if type(tbl) ~= 'table' then return {} end
   return tbl
 end
-
 
 local function add_buf_to_tab()
   local tab = vim.api.nvim_get_current_tabpage()
