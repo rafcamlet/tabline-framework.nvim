@@ -5,6 +5,8 @@ Do you know the lua basics and nothing about tablines? Or maybe are you just laz
 
 ## Demo
 
+![image](https://user-images.githubusercontent.com/8767998/143782627-534f32b3-7b40-457d-86bf-0a42369d78da.png)
+
 ```lua
 local render = function(f)
   f.add '   '
@@ -18,6 +20,7 @@ local render = function(f)
 end
 ```
 
+[Check other examples!](#examples)
 
 ----
 - [Installation](#installation)
@@ -70,6 +73,8 @@ end
 require('tabline_framework').setup { render = render }
 ```
 
+![image](https://user-images.githubusercontent.com/8767998/143783565-b7ded55b-f91c-424f-9520-1fc1203bd0c2.png)
+
 `add` function can take a string or a table as its argument. The first item in table is a content which will be added to tabline. Using the `fg`, `bg` keys, you can specify its highlighting.
 
 Okay, so we have a fancy bug icon, but that isn't too useful. Let's add tabs to it!
@@ -85,6 +90,8 @@ local render = function(f)
   end)
 end
 ```
+![image](https://user-images.githubusercontent.com/8767998/143783645-a5f43c2c-9ba2-4418-8eda-700b5ac82c6a.png)
+
 
 The `make_tabs` function takes callback which will be called for each existing tab. As argument it provides table with tab-related information, which you can use in item content. In the example above, we used index number and the filename of focused buffer.
 
@@ -114,6 +121,7 @@ local render = function(f)
   end)
 end
 ```
+![image](https://user-images.githubusercontent.com/8767998/143783694-1733e1f7-4cec-4487-ab29-fd6e30ab24bb.png)
 
 Icons? People love icons!
 
@@ -148,6 +156,8 @@ local render = function(f)
   end)
 end
 ```
+![image](https://user-images.githubusercontent.com/8767998/143783741-1bf0688d-5b8b-45ac-92c4-5649d9320f4a.png)
+
 
 The right side looks a bit blank. Maybe lsp diagnostic indicators?
 
@@ -172,8 +182,11 @@ local render = function(f)
   f.add ' '
 end
 ```
+![image](https://user-images.githubusercontent.com/8767998/143783814-45fd2171-ac07-42c3-b231-bc2da785b9b5.png)
 
 ## Examples
+
+![image](https://user-images.githubusercontent.com/8767998/143782627-534f32b3-7b40-457d-86bf-0a42369d78da.png)
 
 <details>
   <summary><b>simple</b></summary>
@@ -199,6 +212,8 @@ end
 ```
 
 </details>
+
+![image](https://user-images.githubusercontent.com/8767998/143783288-978394c5-09b9-42ee-a406-54b111d7b828.png)
 
 <details>
   <summary><b>diagonal_tiles</b></summary>
@@ -260,6 +275,9 @@ local render = function(f)
 end
 ```
 </details>
+
+![image](https://user-images.githubusercontent.com/8767998/143783435-02b122f9-3873-4873-9939-c3717daffb60.png)
+
 
 <details>
   <summary><b>fancy_indexes</b></summary>
@@ -328,6 +346,8 @@ local render = function(f)
 end
 ```
 </details>
+
+![image](https://user-images.githubusercontent.com/8767998/143783076-83a967a3-a56e-4ae8-b32f-07f29b633fc0.png)
 
 <details>
   <summary><b>tabs_and_buffers</b></summary>
