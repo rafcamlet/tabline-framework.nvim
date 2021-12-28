@@ -28,8 +28,8 @@ end
 local function get_hl(color)
   local c = vim.api.nvim_get_hl_by_name(color, true)
   return {
-    fg = c.foreground and string.format('#%06x', c.foreground),
-    bg = c.background and string.format('#%06x', c.background),
+    fg = c.foreground and string.format('#%06x', c.foreground) or 'NONE',
+    bg = c.background and string.format('#%06x', c.background) or 'NONE'
   }
 end
 
