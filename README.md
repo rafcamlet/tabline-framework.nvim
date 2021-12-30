@@ -173,8 +173,8 @@ local render = function(f)
   f.add_spacer()
 
   -- get some info from lsp
-  local errors = vim.lsp.diagnostic.get_count(0, 'Error')
-  local warnings = vim.lsp.diagnostic.get_count(0, 'Warning')
+  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
 
   -- and display it
   f.add { '  ' .. errors, fg = "#e86671" }
@@ -186,7 +186,6 @@ end
 
 ## Examples
 
-![image](https://user-images.githubusercontent.com/8767998/143782627-534f32b3-7b40-457d-86bf-0a42369d78da.png)
 
 <details>
   <summary><b>simple</b></summary>
@@ -213,7 +212,7 @@ end
 
 </details>
 
-![image](https://user-images.githubusercontent.com/8767998/143783288-978394c5-09b9-42ee-a406-54b111d7b828.png)
+![image](https://user-images.githubusercontent.com/8767998/143782627-534f32b3-7b40-457d-86bf-0a42369d78da.png)
 
 <details>
   <summary><b>diagonal_tiles</b></summary>
@@ -266,8 +265,8 @@ local render = function(f)
 
   f.add_spacer()
 
-  local errors = vim.lsp.diagnostic.get_count(0, 'Error')
-  local warnings = vim.lsp.diagnostic.get_count(0, 'Warning')
+  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
 
   f.add { '  ' .. errors, fg = "#e86671" }
   f.add { '  ' .. warnings, fg = "#e5c07b"}
@@ -276,7 +275,7 @@ end
 ```
 </details>
 
-![image](https://user-images.githubusercontent.com/8767998/143783435-02b122f9-3873-4873-9939-c3717daffb60.png)
+![image](https://user-images.githubusercontent.com/8767998/143783288-978394c5-09b9-42ee-a406-54b111d7b828.png)
 
 
 <details>
@@ -337,8 +336,8 @@ local render = function(f)
 
   f.add_spacer()
 
-  local errors = vim.lsp.diagnostic.get_count(0, 'Error')
-  local warnings = vim.lsp.diagnostic.get_count(0, 'Warning')
+  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
 
   f.add { '  ' .. errors, fg = "#e86671" }
   f.add { '  ' .. warnings, fg = "#e5c07b"}
@@ -347,7 +346,7 @@ end
 ```
 </details>
 
-![image](https://user-images.githubusercontent.com/8767998/143783076-83a967a3-a56e-4ae8-b32f-07f29b633fc0.png)
+![image](https://user-images.githubusercontent.com/8767998/143783435-02b122f9-3873-4873-9939-c3717daffb60.png)
 
 <details>
   <summary><b>tabs_and_buffers</b></summary>
@@ -382,6 +381,8 @@ local render = function(f)
 end
 ```
 </details>
+
+![image](https://user-images.githubusercontent.com/8767998/143783076-83a967a3-a56e-4ae8-b32f-07f29b633fc0.png)
 
 ## Docs
 

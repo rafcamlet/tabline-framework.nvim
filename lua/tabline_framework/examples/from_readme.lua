@@ -30,8 +30,8 @@ local render = function(f)
 
   f.add_spacer()
 
-  local errors = vim.lsp.diagnostic.get_count(0, 'Error')
-  local warnings = vim.lsp.diagnostic.get_count(0, 'Warning')
+  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
 
   f.add { '  ' .. errors, fg = "#e86671" }
   f.add { '  ' .. warnings, fg = "#e5c07b"}
