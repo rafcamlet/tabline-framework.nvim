@@ -40,6 +40,7 @@ function Tabline:make_tabs(callback, list)
     local filename = vim.fn.fnamemodify(buf_name, ":t")
     local modified = vim.api.nvim_buf_get_option(buf, 'modified')
 
+    self:add('%' .. i .. 'T')
     callback({
       before_current = tabs[i + 1] and tabs[i + 1] == current_tab,
       after_current  = tabs[i - 1] and tabs[i - 1] == current_tab,
@@ -56,6 +57,7 @@ function Tabline:make_tabs(callback, list)
       modified = modified,
     })
   end
+  self:add('%T')
 
   self:use_tabline_fill_colors()
   self:add('')
