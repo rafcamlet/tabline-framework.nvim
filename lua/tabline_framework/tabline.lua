@@ -137,14 +137,14 @@ end
 
 local function icon(name)
   if not name then return end
-  local i = get_icon(name)
+  local i = get_icon(name, nil, {default = true})
   return i
 end
 
 local function icon_color(name)
   if not name then return end
 
-  local _, hl = get_icon(name)
+  local _, hl = get_icon(name, nil, {default = true})
   return hi.get_hl(hl).fg
 end
 
