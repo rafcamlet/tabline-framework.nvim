@@ -67,9 +67,9 @@ function Tabline:__make_bufs(buf_list, callback)
   local bufs = {}
 
   for _, buf in ipairs(buf_list) do
-    local is_valid = vim.api.nvim_buf_is_valid(buf)
-    local is_listed = vim.api.nvim_buf_get_option(buf, 'buflisted')
-    if is_valid and is_listed then table.insert(bufs, buf) end
+    if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_option(buf, 'buflisted') then
+      table.insert(bufs, buf)
+    end
   end
 
   for i, buf in ipairs(bufs) do
