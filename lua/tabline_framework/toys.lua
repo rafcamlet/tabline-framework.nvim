@@ -16,17 +16,19 @@ end
 
 local function add_buf_to_tab()
   local tab = vim.api.nvim_get_current_tabpage()
-  local win = vim.api.nvim_tabpage_get_win(tab)
-  local buf = vim.api.nvim_win_get_buf(win)
-  local is_valid = vim.api.nvim_buf_is_valid(buf)
-  local is_listed = vim.api.nvim_buf_get_option(buf, 'buflisted')
-  if not is_valid or not is_listed then return end
+  local windows = vim.api.nvim_tabpage_list_wins(tab)
+  buffers_in_tab = {}
+  for _,v in ipairs(windows) do
+    local buf = vim.api.nvim_win_get_buf(v)
 
-  local list = get_tab_buffers(tab)
-
-  if not vim.tbl_contains(list, buf) then table.insert(list, buf) end
-
-  vim.api.nvim_tabpage_set_var(tab, 'tabline_framework_buffer_list', list)
+    local is_valid = vim.api.nvim_buf_is_valid(buf)
+    local is_listed = vim.api.nvim_buf_get_option(buf, 'buflisted')
+    if is_valid and is_listed then
+      local name = vim.api.nvim_buf_get_name(buf)
+      table.insert(buffers_in_tab, name)
+    end
+  end
+  vim.api.nvim_tabpage_set_var(tab, 'tabline_framework_buffer_list', buffers_in_tab)
 end
 
 
