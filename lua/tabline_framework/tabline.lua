@@ -1,10 +1,14 @@
+local print_warn = require'tabline_framework.helpers'.print_warn
 local Config = require'tabline_framework.config'
 local hi = require'tabline_framework.highlights'
+local functions = require'tabline_framework.functions'
 local Collector = require'tabline_framework.collector'
 local get_icon = require'nvim-web-devicons'.get_icon
 
 local Tabline = {}
 Tabline.__index = Tabline
+
+local CurrentTab
 
 function Tabline:use_tabline_colors()
   self.fg = Config.hl.fg
@@ -41,6 +45,8 @@ function Tabline:make_tabs(callback, list)
     local modified = vim.api.nvim_buf_get_option(buf, 'modified')
 
     self:add('%' .. i .. 'T')
+
+    CurrentTab = i
     callback({
       before_current = tabs[i + 1] and tabs[i + 1] == current_tab,
       after_current  = tabs[i - 1] and tabs[i - 1] == current_tab,
@@ -56,6 +62,7 @@ function Tabline:make_tabs(callback, list)
       filename = #filename > 0 and filename or nil,
       modified = modified,
     })
+    CurrentTab = nil
   end
   self:add('%T')
 
@@ -120,7 +127,7 @@ function Tabline:make_tab_bufs(callback)
   return self:__make_bufs(bufs, callback)
 end
 
-function Tabline:add(item)
+function Tabline:add(item, closure)
   if type(item) == 'string' then item = { item }
   elseif type(item) == 'number' then item = { string(item) }
   elseif type(item) == 'table' then
@@ -129,10 +136,43 @@ function Tabline:add(item)
     return
   end
 
+  if closure then closure(item) end
+
   item.fg = item.fg or self.fg
   item.bg = item.bg or self.bg
 
   self.collector:add(item)
+end
+
+function Tabline:close_tab_btn(item)
+  if not CurrentTab then
+    print_warn 'TablineFramework: close_tab_btn function used outside the tab'
+    return
+  end
+
+  self:add(item, function(tbl)
+    tbl[1] = '%' .. CurrentTab .. 'X' .. tbl[1] .. '%X'
+  end)
+end
+
+
+function Tabline:add_btn(item, callback)
+  if not callback then
+    print_warn 'TablineFramework: callback function not provided'
+    return
+  end
+
+  self:add(item, function(tbl)
+    local name = functions.register(function(minwid, clicks, mouse_btn, modifiers)
+      callback({
+        minwid = minwid,
+        clicks = clicks,
+        mouse_btn = mouse_btn,
+        modifiers = modifiers
+      })
+    end)
+    tbl[1] = '%@' .. name .. '@' .. tbl[1] .. '%T'
+  end)
 end
 
 local function icon(name)
@@ -151,6 +191,7 @@ end
 function Tabline:render(render_func)
   local content = {}
 
+  functions.clear()
   self:use_tabline_fill_colors()
 
   render_func({
@@ -166,6 +207,8 @@ function Tabline:render(render_func)
     add_spacer = function() self:add('%=') end,
     make_tabs = function(callback, list) self:make_tabs(callback, list) end,
     make_bufs = function(callback, list) self:make_bufs(callback, list) end,
+    close_tab_btn = function(arg) self:close_tab_btn(arg) end,
+    add_btn = function(arg, callback) self:add_btn(arg, callback) end,
     -- make_tab_bufs = function(callback) self:make_tab_bufs(callback) end,
   })
 

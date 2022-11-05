@@ -1,5 +1,6 @@
 local print_warn = require'tabline_framework.helpers'.print_warn
 local hi = require'tabline_framework.highlights'
+local functions = require'tabline_framework.functions'
 local Config = require'tabline_framework.config'
 local Tabline = require'tabline_framework.tabline'
 
@@ -16,6 +17,7 @@ local function setup(opts)
   end
 
   hi.clear()
+  functions.clear()
 
   Config:new {
     hl = hi.tabline(),
