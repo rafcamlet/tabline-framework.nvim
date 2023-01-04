@@ -436,6 +436,12 @@ It iterates over all tabs and passes to its callback table with tab related info
 
 Like `make_tabs` but iterates over listed buffers (check the `:h buflisted`). The info table has no `win` and `tab` keys, because buffers can be associated with multiple (or none) windows/tabs.
 
+### `f.close_tab_btn()`
+* `f.close_tab_btn 'string'`
+* `f.close_tab_btn { 'string', fg = '#ffffff', bg = '#000000' }`
+
+Adds a native close button to the tab. Calling this function outside of `make_tabs` gives a warning and does nothing.
+
 ----
 
 **Do you have questions? An idea for missing functionalities? Found a bug? Don't be afraid to open a new issue.**
