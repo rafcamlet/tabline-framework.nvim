@@ -52,7 +52,7 @@ require('tabline_framework').setup {
   hl = { fg = "#abb2bf" bg ="#31353f" }
   -- Default color of selected item
   -- if not set TF uses TabLineSel highlight group colors
-  hl_sel = { fg = "#282c34" bg ="#abb2bf" }
+  hl_sel = { fg = "#282c34" bg ="#abb2bf" gui = "bold,underline" }
   -- Default color of everything except items
   -- if not set TF uses TabLineFill highlight group colors
   hl_fill = { fg = "#282c34" bg ="#abb2bf" }

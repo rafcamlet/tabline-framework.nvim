@@ -13,16 +13,19 @@ local CurrentTab
 function Tabline:use_tabline_colors()
   self.fg = Config.hl.fg
   self.bg = Config.hl.bg
+  self.gui = Config.hl.gui
 end
 
 function Tabline:use_tabline_sel_colors()
   self.fg = Config.hl_sel.fg
   self.bg = Config.hl_sel.bg
+  self.gui = Config.hl_sel.gui
 end
 
 function Tabline:use_tabline_fill_colors()
   self.fg = Config.hl_fill.fg
   self.bg = Config.hl_fill.bg
+  self.gui = Config.hl_fill.gui
 end
 
 
@@ -140,6 +143,7 @@ function Tabline:add(item, closure)
 
   item.fg = item.fg or self.fg
   item.bg = item.bg or self.bg
+  item.gui = item.gui or self.gui
 
   self.collector:add(item)
 end
@@ -154,7 +158,6 @@ function Tabline:close_tab_btn(item)
     tbl[1] = '%' .. CurrentTab .. 'X' .. tbl[1] .. '%X'
   end)
 end
-
 
 function Tabline:add_btn(item, callback)
   if not callback then
@@ -200,9 +203,11 @@ function Tabline:render(render_func)
     set_colors = function(opts)
       self.fg = opts.fg or self.fg
       self.bg = opts.bg or self.bg
+      self.gui = opts.gui or self.gui
     end,
     set_fg = function(arg_fg) self.fg = arg_fg or self.fg end,
     set_bg = function(arg_bg) self.bg = arg_bg or self.bg end,
+    set_gui = function(arg_gui) self.gui = arg_gui or self.gui end,
     add = function(arg) self:add(arg) end,
     add_spacer = function() self:add('%=') end,
     make_tabs = function(callback, list) self:make_tabs(callback, list) end,
@@ -213,7 +218,7 @@ function Tabline:render(render_func)
   })
 
   for _, item in ipairs(self.collector) do
-    table.insert(content, ('%%#%s#%s'):format(hi.set_hl(item.fg, item.bg), item[1]))
+    table.insert(content, ('%%#%s#%s'):format(hi.set_hl(item.fg, item.bg, item.gui), item[1]))
   end
 
   return table.concat(content)
