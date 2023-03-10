@@ -398,7 +398,10 @@ Sets the default foreground color. Useful for changing highlight of many element
 ### `f.set_bg('#000000')`
 Same as `set_fg`, but background.
 
-### `f.set_colors { fg = '#ffffff', bg = '#000000' }`
+### `f.set_gui('bold,underline')`
+Same as `set_fg`, but for gui options.
+
+### `f.set_colors { fg = '#ffffff', bg = '#000000', gui = 'italic' }`
 Sets default colors
 
 ### `f.add_spacer()`
@@ -438,7 +441,7 @@ Like `make_tabs` but iterates over listed buffers (check the `:h buflisted`). Th
 
 ### `f.close_tab_btn()`
 * `f.close_tab_btn 'string'`
-* `f.close_tab_btn { 'string', fg = '#ffffff', bg = '#000000' }`
+* `f.close_tab_btn { 'string', fg = '#ffffff', bg = '#000000', gui = 'bold,underline' }`
 
 Adds a native close button to the tab. Calling this function outside of `make_tabs` gives a warning and does nothing.
 

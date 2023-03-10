@@ -8,7 +8,8 @@ end
 
 local function set_hl(fg, bg, gui)
   if not fg and not bg and not gui then return end
-  local key = fg:sub(2) .. '_' .. bg:sub(2)
+  local key = fg:sub(2) .. '_' .. bg:sub(2) .. (gui or '')
+
   if colors[key] then return colors[key] end
 
   color_index = color_index + 1
